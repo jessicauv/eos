@@ -22,6 +22,11 @@ const dialogNextBtn = document.getElementById('dialog-next-btn');
 const dialogCloseBtn = document.getElementById('dialog-close-btn');
 
 let lastOpenButton = null;
+let onExhibitOpened = null;
+
+export function setOnExhibitOpened(fn) {
+  onExhibitOpened = fn;
+}
 
 export async function loadExhibits() {
   const res = await fetch('data/exhibits.json');
@@ -116,6 +121,8 @@ function togglePlay() {
 export function openExhibit(id) {
   const index = exhibits.findIndex((ex) => ex.id === id);
   if (index === -1) return;
+
+  if (onExhibitOpened) onExhibitOpened();
 
   lastOpenButton = document.querySelector(`.btn-open[data-exhibit="${id}"]`);
   currentExhibitIndex = index;

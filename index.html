@@ -55,7 +55,7 @@
   <!-- ===== MUSEUM SCREEN ===== -->
   <div id="museum-screen" class="screen" hidden>
     <header class="museum-header">
-      <h1 id="museum-heading">The Museum</h1>
+      <h1 id="museum-heading" tabindex="-1">The Museum</h1>
     </header>
 
     <main class="museum-main" id="museum">
@@ -76,7 +76,7 @@
       </section>
 
       <!-- Keyboard shortcuts -->
-      <section class="shortcuts" aria-label="Keyboard shortcuts" id="shortcuts">
+      <section class="shortcuts" aria-label="Keyboard shortcuts" id="shortcuts" tabindex="-1">
         <h2>Keyboard Shortcuts</h2>
         <ul class="shortcuts-list">
           <li><kbd>1</kbd>–<kbd>4</kbd> Open exhibit 1–4</li>
@@ -115,7 +115,7 @@
         <img id="dialog-img" src="" alt="" width="1600" height="1000">
       </div>
       <div class="dialog-panel">
-        <h2 id="dialog-title"></h2>
+        <h2 id="dialog-title" tabindex="-1"></h2>
 
         <div class="player-controls">
           <button id="dialog-play-btn" class="btn btn-primary" type="button" aria-pressed="false">

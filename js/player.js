@@ -23,7 +23,9 @@ export function play(src) {
     audio.src = src;
   }
   audio.currentTime = 0;
-  audio.play();
+  audio.play().catch(() => {
+    emit('ended');
+  });
 }
 
 export function pause() {
@@ -31,7 +33,7 @@ export function pause() {
 }
 
 export function resume() {
-  if (audio.paused && audio.src) audio.play();
+  if (audio.paused && audio.src) audio.play().catch(() => {});
 }
 
 export function stop() {

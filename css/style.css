@@ -1,0 +1,518 @@
+/* ===== RESET & BASE ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #0a0a0f;
+  --color-bg-card: #14141f;
+  --color-bg-dialog: #111118;
+  --color-text: #e8e4dc;
+  --color-text-muted: #a09e96;
+  --color-primary: #d4a843;
+  --color-primary-hover: #e6bc55;
+  --color-focus: #6ea8fe;
+  --color-border: #2a2a35;
+  --font-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radius: 8px;
+  --glow-color: #f2c14e;
+}
+
+html {
+  font-size: 112.5%; /* 18px base */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+}
+
+/* ===== SKIP LINK ===== */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  z-index: 1000;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ===== SCREEN-READER ONLY ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== FOCUS STYLES ===== */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ===== SCREENS ===== */
+.screen {
+  display: none;
+  min-height: 100vh;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* ===== INTRO SCREEN ===== */
+.intro-header {
+  text-align: center;
+  padding: 3rem 1rem 1rem;
+}
+
+.intro-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.01em;
+}
+
+.intro-main {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.intro-description {
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 40rem;
+  color: var(--color-text);
+}
+
+.intro-photo {
+  width: 100%;
+  max-width: 40rem;
+}
+
+.intro-photo figcaption {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.intro-video {
+  width: 100%;
+  max-width: 40rem;
+}
+
+.intro-video video {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+.intro-hint {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.6rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  border-color: var(--color-text-muted);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.btn-open {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-open:hover,
+.btn-open:focus-visible {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.btn-close {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+.btn-close:hover,
+.btn-close:focus-visible {
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}
+
+/* ===== MUSEUM SCREEN ===== */
+.museum-header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+
+.museum-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.museum-main {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 2rem;
+}
+
+/* Tour controls */
+.tour-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.tour-active-controls {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.tour-status {
+  font-weight: 600;
+  color: var(--color-primary);
+  flex: 1 1 100%;
+}
+
+.tour-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Shortcuts */
+.shortcuts {
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.shortcuts h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-muted);
+}
+
+.shortcuts-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  font-size: 0.9rem;
+}
+
+.shortcuts-list kbd {
+  display: inline-block;
+  padding: 0.1em 0.45em;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.85em;
+  color: var(--color-text);
+}
+
+/* ===== EXHIBIT CARDS GRID ===== */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  background: var(--color-bg-card);
+  border: 2px solid var(--glow-color, var(--color-border));
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: 0 0 12px 2px color-mix(in srgb, var(--glow-color) 25%, transparent);
+  transition: box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 0 20px 4px color-mix(in srgb, var(--glow-color) 40%, transparent);
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  flex: 1;
+}
+
+.card .btn-open {
+  align-self: flex-start;
+}
+
+/* Card playing highlight */
+.card.playing {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 12px 2px color-mix(in srgb, var(--glow-color) 25%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 28px 8px color-mix(in srgb, var(--glow-color) 55%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card.playing {
+    animation: none;
+    box-shadow: 0 0 20px 6px color-mix(in srgb, var(--glow-color) 50%, transparent);
+  }
+}
+
+/* ===== EXHIBIT DIALOG ===== */
+.exhibit-dialog {
+  background: var(--color-bg-dialog);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0;
+  max-width: 72rem;
+  width: calc(100% - 2rem);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.exhibit-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.dialog-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dialog-layout {
+    flex-direction: row;
+  }
+
+  .dialog-image {
+    flex: 0 0 60%;
+  }
+
+  .dialog-panel {
+    flex: 1;
+  }
+}
+
+.dialog-image img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+.dialog-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dialog-panel h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.dialog-panel h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.dialog-panel section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dialog-panel p,
+.dialog-panel li {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.dialog-panel ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+/* Player controls */
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Transcript & description details */
+.transcript-details,
+.long-desc-details {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+}
+
+.transcript-details summary,
+.long-desc-details summary {
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  color: var(--color-text);
+}
+
+.transcript-details div,
+.long-desc-details div {
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Dialog navigation */
+.dialog-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ===== FOOTER ===== */
+.museum-footer {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.museum-footer a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.museum-footer a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* ===== UTILITIES ===== */
+[hidden] {
+  display: none !important;
+}

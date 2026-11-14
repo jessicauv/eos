@@ -1,4 +1,4 @@
-// Eos — main.js: view switching and init (keyboard shortcuts added in step 5)
+import { loadExhibits } from './exhibits.js';
 
 const introScreen = document.getElementById('intro-screen');
 const museumScreen = document.getElementById('museum-screen');
@@ -14,5 +14,9 @@ function showMuseum() {
 
 enterBtn.addEventListener('click', showMuseum);
 
-// Give the enter button focus on load
-enterBtn.focus();
+async function init() {
+  await loadExhibits();
+  enterBtn.focus();
+}
+
+init();

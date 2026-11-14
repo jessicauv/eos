@@ -1,0 +1,99 @@
+{
+  "welcome": {
+    "audio": "audio/welcome.mp3",
+    "transcript": "Welcome to Eos, a museum where you can hear our changing planet. This museum has four exhibits, each turning NASA satellite data into choral music. You'll hear how city lights have changed, how oceans are warming, how carbon dioxide ebbs and flows, and where lightning strikes around the world. Each exhibit plays a short piece of music with a spoken explanation. Use the keyboard shortcuts or tab through the controls to explore. Enjoy your visit."
+  },
+  "closing": {
+    "audio": "audio/closing.mp3",
+    "transcript": "Thank you for visiting Eos. Every sound you heard was shaped by real NASA data — measurements taken from satellites orbiting hundreds of miles above us, turned into music so you could hear what our planet is going through. I hope it gave you a new way to feel the changes happening on Earth. Safe travels."
+  },
+  "exhibits": [
+    {
+      "id": 1,
+      "title": "Earth's Night Lights, 2012–2023",
+      "summary": "Hear where city lights grew and faded over a decade.",
+      "image": "images/exhibit-1.jpg",
+      "thumb": "images/exhibit-1-thumb.jpg",
+      "alt": "NASA satellite map of Earth at night showing changes in city lights between 2012 and 2023.",
+      "longDescription": "A dark world map viewed from space. Bright white and yellow clusters mark cities and towns across every continent. Dense webs of light cover eastern North America, Europe, and East Asia. Dimmer, scattered points appear across Africa and South America. Some areas glow brighter than a decade ago — parts of India, Southeast Asia, and sub-Saharan Africa — while a few regions in the Middle East show darkened patches where conflict disrupted infrastructure.",
+      "whatItShows": "Satellite measurements of artificial light at night, comparing 2012 to 2023. The changes reveal where populations grew, where economies expanded, and where conflict or disaster reduced human activity. Brighter areas mean more development; dimmer areas can mean hardship.",
+      "soundRules": [
+        "More voices join the choir where lights are brighter.",
+        "Higher-pitched voices represent areas with the strongest growth in light.",
+        "The harmony shifts to minor chords where lights have dimmed."
+      ],
+      "data": "NASA SVS: Change in Night Lights between 2012 and 2023 – EIC Version",
+      "sourceUrl": "https://svs.gsfc.nasa.gov/5283",
+      "audio": "audio/exhibit-1.mp3",
+      "transcript": "Exhibit 1: Earth's Night Lights. You're looking at a map of every artificial light visible from space — every city, highway, and fishing fleet. This version compares 2012 to 2023, so you can see where humanity expanded and where it retreated. In the music, each voice in the choir represents a region. Where lights grew brighter, more voices join and the pitch rises. Where lights dimmed — sometimes from conflict, sometimes from disaster — the harmony shifts. Listen for the contrast between the growing glow of India and the darkened patches over Syria.",
+      "glowColor": "#f2c14e",
+      "ledTimeline": "data/led-timeline-1.json"
+    },
+    {
+      "id": 2,
+      "title": "Ocean Temperatures, 1985–2024",
+      "summary": "Listen to the ocean's rising heat across the globe.",
+      "image": "images/exhibit-2.jpg",
+      "thumb": "images/exhibit-2-thumb.jpg",
+      "alt": "Global ocean sea surface temperature map showing warm reds near the equator and cool blues near the poles.",
+      "longDescription": "A global map of ocean surface temperatures rendered in a gradient from deep blue at the poles through green and yellow in temperate zones to vivid red and orange in the tropics. The warmest waters form a wide band along the equator, with tongues of warm water extending poleward along western boundary currents like the Gulf Stream and Kuroshio. Cool upwelling zones appear along the western coasts of continents.",
+      "whatItShows": "Sea surface temperature data collected by satellites and ocean buoys from 1985 to 2024. The visualization shows how the ocean has absorbed much of the excess heat trapped by greenhouse gases. Average ocean temperatures have risen roughly 0.6°C over this period, with some regions warming much faster.",
+      "soundRules": [
+        "A low bass drone represents the deep ocean baseline temperature.",
+        "Rising string tones mark warming trends over the decades.",
+        "Sudden bright notes indicate marine heatwave events.",
+        "The tempo gradually accelerates as warming speeds up in recent years."
+      ],
+      "data": "NOAA Coral Reef Watch & NASA PO.DAAC: Global Sea Surface Temperature",
+      "sourceUrl": "https://svs.gsfc.nasa.gov/5190",
+      "audio": "audio/exhibit-2.mp3",
+      "transcript": "Exhibit 2: Ocean Temperatures. The ocean covers 70 percent of Earth's surface and has absorbed over 90 percent of the extra heat trapped by greenhouse gases. In this piece, a deep bass drone represents the ocean's baseline temperature. As the decades pass from 1985 to today, you'll hear string tones rising — that's the warming trend. The sharp, bright notes that cut through are marine heatwaves, events that bleach coral reefs and disrupt ecosystems. Notice how the tempo picks up toward the end. The warming isn't just continuing — it's accelerating.",
+      "glowColor": "#3fb6c4",
+      "ledTimeline": "data/led-timeline-2.json"
+    },
+    {
+      "id": 3,
+      "title": "Carbon Dioxide, 2002–2023",
+      "summary": "Hear the rhythm of CO₂ rising in the atmosphere.",
+      "image": "images/exhibit-3.jpg",
+      "thumb": "images/exhibit-3-thumb.jpg",
+      "alt": "Atmospheric carbon dioxide concentration visualization showing swirling plumes of CO2 over Earth's surface.",
+      "longDescription": "A view of Earth wrapped in translucent layers of color representing atmospheric carbon dioxide concentration. Dense orange and red plumes hover over industrialized regions — eastern China, the eastern United States, and Europe. The gas visibly flows and swirls with atmospheric circulation, carried by jet streams across the Pacific and Atlantic. Seasonal breathing is visible: the Northern Hemisphere greens slightly in summer as plants absorb CO₂, then reddens in winter when they stop.",
+      "whatItShows": "Carbon dioxide concentration measured by NASA's OCO-2 satellite and ground stations from 2002 to 2023. CO₂ levels have risen from about 373 parts per million to over 420 ppm during this period. The visualization reveals both the human sources and the seasonal 'breathing' of the planet as forests absorb and release carbon.",
+      "soundRules": [
+        "A rhythmic pulse represents the seasonal cycle — Earth breathing in and out.",
+        "The baseline pitch rises steadily as CO₂ concentration increases year over year.",
+        "Denser choral layers build over industrial regions.",
+        "Brief pauses in the rhythm mark the COVID-19 slowdown in 2020."
+      ],
+      "data": "NASA SVS: A Year in the Life of Earth's CO₂ (OCO-2 Data)",
+      "sourceUrl": "https://svs.gsfc.nasa.gov/4781",
+      "audio": "audio/exhibit-3.mp3",
+      "transcript": "Exhibit 3: Carbon Dioxide. Every year, Earth breathes. In spring and summer, forests across the Northern Hemisphere pull carbon dioxide out of the air. In fall and winter, they release it back. You can hear that rhythm as a steady pulse in the music. But underneath that natural breathing, there's a rising tone — that's the year-over-year increase in CO₂ from burning fossil fuels. In 2002, we were at 373 parts per million. Now we're past 420. The choir grows denser over industrial regions. And if you listen carefully around the middle, there's a brief pause — that was 2020, when the world slowed down.",
+      "glowColor": "#f08a4b",
+      "ledTimeline": "data/led-timeline-3.json"
+    },
+    {
+      "id": 4,
+      "title": "Lightning, 1995–2025",
+      "summary": "Experience the flash and rumble of global lightning patterns.",
+      "image": "images/exhibit-4.jpg",
+      "thumb": "images/exhibit-4-thumb.jpg",
+      "alt": "Global lightning frequency map showing bright hotspots of electrical storm activity over tropical land masses.",
+      "longDescription": "A dark globe dotted with points of white and lavender light representing lightning strikes. The densest clusters appear over tropical land masses — the Congo Basin in central Africa is the brightest spot on Earth, followed by northern South America and the Maritime Continent of Southeast Asia. Lightning over oceans is sparse. The pattern follows afternoon convection: heat from the sun warms land, driving thunderstorms that peak in local afternoon and evening hours.",
+      "whatItShows": "Lightning flash rate data from NASA's Lightning Imaging Sensor (LIS) aboard the International Space Station and the TRMM satellite, spanning 1995 to 2025. Earth experiences roughly 45 lightning flashes per second. The data reveals that lightning is overwhelmingly a land phenomenon driven by solar heating, and its distribution is shifting as the climate warms.",
+      "soundRules": [
+        "Percussive strikes represent individual lightning flashes.",
+        "The density of strikes matches the geographic flash rate.",
+        "Low rumbling tones follow each cluster, simulating distant thunder.",
+        "The piece cycles through a full day, following the sun as storms build in afternoon heat."
+      ],
+      "data": "NASA LIS/OTD: Global Lightning Activity (ISS & TRMM)",
+      "sourceUrl": "https://svs.gsfc.nasa.gov/5004",
+      "audio": "audio/exhibit-4.mp3",
+      "transcript": "Exhibit 4: Lightning. Right now, as you listen, roughly 45 bolts of lightning are striking the Earth every second. This piece maps where they fall. The percussive hits you hear represent flashes — and the denser they are, the more active that region is. The single most electric place on Earth is the Congo Basin in central Africa, followed by northern South America. Notice that almost all the lightning is over land, not ocean. That's because the sun heats land faster, driving the towering thunderstorms that generate lightning. The piece cycles through a full day, following the sun westward. Listen for the rumble that follows each cluster — that's the thunder catching up.",
+      "glowColor": "#c9c4ff",
+      "ledTimeline": "data/led-timeline-4.json"
+    }
+  ]
+}

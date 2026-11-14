@@ -1,7 +1,10 @@
+import * as player from './player.js';
+
 let exhibits = [];
 let welcomeData = null;
 let closingData = null;
 let currentExhibitIndex = -1;
+let currentAudioSrc = null;
 
 const cardsContainer = document.getElementById('exhibit-cards');
 const dialog = document.getElementById('exhibit-dialog');
@@ -63,12 +66,51 @@ function initDialog() {
   dialogPrevBtn.addEventListener('click', () => navigateExhibit(-1));
   dialogNextBtn.addEventListener('click', () => navigateExhibit(1));
 
+  dialogPlayBtn.addEventListener('click', togglePlay);
+
+  player.on('timeupdate', ({ current, duration }) => {
+    dialogProgress.textContent = `${player.formatTime(current)} of ${player.formatTime(duration)}`;
+  });
+
+  player.on('started', () => {
+    dialogPlayBtn.textContent = 'Pause';
+    dialogPlayBtn.setAttribute('aria-pressed', 'true');
+  });
+
+  player.on('paused', () => {
+    dialogPlayBtn.textContent = 'Play';
+    dialogPlayBtn.setAttribute('aria-pressed', 'false');
+  });
+
+  player.on('ended', () => {
+    dialogPlayBtn.textContent = 'Play';
+    dialogPlayBtn.setAttribute('aria-pressed', 'false');
+    dialogProgress.textContent = '0:00 of 0:00';
+    currentAudioSrc = null;
+  });
+
   dialog.addEventListener('close', () => {
+    player.stop();
+    currentAudioSrc = null;
     if (lastOpenButton) {
       lastOpenButton.focus();
       lastOpenButton = null;
     }
   });
+}
+
+function togglePlay() {
+  const ex = exhibits[currentExhibitIndex];
+  if (!ex) return;
+
+  if (player.isPlaying() && currentAudioSrc === ex.audio) {
+    player.pause();
+  } else if (currentAudioSrc === ex.audio) {
+    player.resume();
+  } else {
+    currentAudioSrc = ex.audio;
+    player.play(ex.audio);
+  }
 }
 
 export function openExhibit(id) {
@@ -125,6 +167,8 @@ function updateNavButtons() {
 function navigateExhibit(direction) {
   const newIndex = currentExhibitIndex + direction;
   if (newIndex < 0 || newIndex >= exhibits.length) return;
+  player.stop();
+  currentAudioSrc = null;
   currentExhibitIndex = newIndex;
   populateDialog(exhibits[newIndex]);
   dialogTitle.focus();

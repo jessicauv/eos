@@ -3,6 +3,8 @@ import { getExhibits, getWelcomeData, getClosingData, getCardByExhibitId, openEx
 
 let running = false;
 let paused = false;
+let onLedPlay = null;
+let onLedStop = null;
 let queue = [];
 let currentStep = -1;
 let pauseTimer = null;
@@ -16,8 +18,10 @@ const tourPauseBtn = document.getElementById('tour-pause-btn');
 const tourSkipBtn = document.getElementById('tour-skip-btn');
 const tourStopBtn = document.getElementById('tour-stop-btn');
 
-export function init(announceFn) {
+export function init(announceFn, ledPlayFn, ledStopFn) {
   onAnnounce = announceFn;
+  onLedPlay = ledPlayFn || null;
+  onLedStop = ledStopFn || null;
   startBtn.addEventListener('click', start);
   welcomeBtn.addEventListener('click', playWelcome);
   tourPauseBtn.addEventListener('click', pauseResume);
@@ -101,6 +105,7 @@ export function stop() {
   paused = false;
   currentStep = -1;
   clearHighlights();
+  if (onLedStop) onLedStop();
   showControls(false);
   announce('Tour stopped');
 }
@@ -111,6 +116,7 @@ function playNext() {
   if (currentStep >= queue.length) {
     running = false;
     currentStep = -1;
+    if (onLedStop) onLedStop();
     showControls(false);
     announce('Tour finished');
     return;
@@ -122,6 +128,9 @@ function playNext() {
 
   if (step.type === 'exhibit') {
     highlightCard(step.exhibitId);
+    if (onLedPlay) onLedPlay(step.exhibitId);
+  } else {
+    if (onLedStop) onLedStop();
   }
 
   player.play(step.audio);
@@ -135,6 +144,7 @@ function onTrackEnded() {
   if (currentStep >= queue.length - 1) {
     running = false;
     currentStep = -1;
+    if (onLedStop) onLedStop();
     showControls(false);
     announce('Tour finished');
     return;

@@ -348,6 +348,14 @@ img {
   animation: glow-pulse 4s ease-in-out infinite;
 }
 
+/* LED-driven glow: when --glow-brightness is set by led.js, override the animation */
+.card.led-active {
+  animation: none;
+  box-shadow: 0 0 calc(10px + 20px * var(--glow-brightness, 0.5)) calc(2px + 6px * var(--glow-brightness, 0.5))
+    color-mix(in srgb, var(--glow-color) calc(20% + 40% * var(--glow-brightness, 0.5)), transparent);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
 @keyframes glow-pulse {
   0%, 100% {
     box-shadow: 0 0 12px 2px color-mix(in srgb, var(--glow-color) 25%, transparent);
@@ -359,6 +367,11 @@ img {
 
 @media (prefers-reduced-motion: reduce) {
   .card.playing {
+    animation: none;
+    box-shadow: 0 0 20px 6px color-mix(in srgb, var(--glow-color) 50%, transparent);
+  }
+
+  .card.led-active {
     animation: none;
     box-shadow: 0 0 20px 6px color-mix(in srgb, var(--glow-color) 50%, transparent);
   }

@@ -23,9 +23,19 @@ const dialogCloseBtn = document.getElementById('dialog-close-btn');
 
 let lastOpenButton = null;
 let onExhibitOpened = null;
+let onExhibitPlay = null;
+let onExhibitStop = null;
 
 export function setOnExhibitOpened(fn) {
   onExhibitOpened = fn;
+}
+
+export function setOnExhibitPlay(fn) {
+  onExhibitPlay = fn;
+}
+
+export function setOnExhibitStop(fn) {
+  onExhibitStop = fn;
 }
 
 export async function loadExhibits() {
@@ -97,6 +107,7 @@ function initDialog() {
   dialog.addEventListener('close', () => {
     player.stop();
     currentAudioSrc = null;
+    if (onExhibitStop) onExhibitStop();
     if (lastOpenButton) {
       lastOpenButton.focus();
       lastOpenButton = null;
@@ -114,6 +125,7 @@ function togglePlay() {
     player.resume();
   } else {
     currentAudioSrc = ex.audio;
+    if (onExhibitPlay) onExhibitPlay(ex.id);
     player.play(ex.audio);
   }
 }

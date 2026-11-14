@@ -1,6 +1,7 @@
-import { loadExhibits, setOnExhibitOpened, openExhibit, closeExhibit, isDialogOpen, getExhibits, getCurrentExhibitIndex } from './exhibits.js';
+import { loadExhibits, setOnExhibitOpened, setOnExhibitPlay, setOnExhibitStop, openExhibit, closeExhibit, isDialogOpen, getExhibits, getCurrentExhibitIndex } from './exhibits.js';
 import * as player from './player.js';
 import * as tour from './tour.js';
+import * as led from './led.js';
 import { announce } from './announcer.js';
 
 const introScreen = document.getElementById('intro-screen');
@@ -115,8 +116,11 @@ document.addEventListener('keydown', handleKeydown);
 
 async function init() {
   await loadExhibits();
-  tour.init(announce);
+  tour.init(announce, (id) => led.setActiveExhibit(id), () => led.clearActiveExhibit());
+  await led.init();
   setOnExhibitOpened(() => tour.handleExhibitOpened());
+  setOnExhibitPlay((id) => led.setActiveExhibit(id));
+  setOnExhibitStop(() => led.clearActiveExhibit());
   enterBtn.focus();
 }
 

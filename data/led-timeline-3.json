@@ -1,0 +1,15 @@
+{
+  "frames": [
+    { "t": 0.0, "color": [240, 138, 75], "brightness": 0.3 },
+    { "t": 4.0, "color": [240, 138, 75], "brightness": 0.5 },
+    { "t": 10.0, "color": [255, 160, 90], "brightness": 0.7 },
+    { "t": 18.0, "color": [255, 180, 100], "brightness": 0.9 },
+    { "t": 25.0, "color": [240, 138, 75], "brightness": 1.0 },
+    { "t": 35.0, "color": [220, 120, 60], "brightness": 0.8 },
+    { "t": 45.0, "color": [250, 150, 85], "brightness": 0.85 },
+    { "t": 55.0, "color": [240, 138, 75], "brightness": 0.7 },
+    { "t": 65.0, "color": [245, 145, 80], "brightness": 0.6 },
+    { "t": 75.0, "color": [240, 138, 75], "brightness": 0.4 },
+    { "t": 90.0, "color": [240, 138, 75], "brightness": 0.3 }
+  ]
+}

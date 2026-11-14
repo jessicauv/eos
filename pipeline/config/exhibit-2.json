@@ -1,0 +1,22 @@
+{
+  "id": 2,
+  "name": "Ocean Currents",
+  "source": "sources/images/exhibit-2.jpg",
+  "source_type": "image",
+  "method": "synthetic_gradient",
+  "crop": null,
+  "gradient": [
+    [0.0, [0, 0, 180]],
+    [0.25, [0, 150, 255]],
+    [0.5, [0, 200, 100]],
+    [0.75, [255, 200, 0]],
+    [1.0, [255, 50, 0]]
+  ],
+  "land_gray_max_saturation": 15,
+  "max_color_distance": 60,
+  "n_bands": 30,
+  "step_seconds": 2.0,
+  "events": false,
+  "event_threshold": 0.8,
+  "base_color": [78, 172, 242]
+}

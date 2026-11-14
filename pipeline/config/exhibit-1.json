@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "name": "Night Lights",
+  "source": "sources/images/exhibit-1.jpg",
+  "source_type": "image",
+  "method": "purple_orange",
+  "crop": null,
+  "orange_hue_range": [10, 40],
+  "purple_hue_range": [260, 310],
+  "saturation_min": 30,
+  "n_bands": 30,
+  "step_seconds": 2.0,
+  "events": false,
+  "event_threshold": 0.8,
+  "base_color": [242, 193, 78]
+}

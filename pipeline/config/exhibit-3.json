@@ -1,0 +1,15 @@
+{
+  "id": 3,
+  "name": "Carbon Dioxide",
+  "source": "sources/videos/exhibit-3.mp4",
+  "source_type": "video",
+  "method": "time_co2",
+  "crop": null,
+  "co2_hue_range": [0, 60],
+  "co2_saturation_min": 20,
+  "n_frames": 30,
+  "step_seconds": 2.0,
+  "events": false,
+  "event_threshold": 0.8,
+  "base_color": [242, 78, 78]
+}

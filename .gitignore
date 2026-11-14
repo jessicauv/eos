@@ -1,0 +1,8 @@
+# Pipeline source videos (too large for GitHub)
+pipeline/sources/videos/
+
+# Pipeline build artifacts
+pipeline/build/
+pipeline/rendered/
+pipeline/assets/
+pipeline/output/

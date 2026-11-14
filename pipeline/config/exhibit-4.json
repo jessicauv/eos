@@ -1,0 +1,15 @@
+{
+  "id": 4,
+  "name": "Lightning",
+  "source": "sources/videos/exhibit-4.mp4",
+  "source_type": "video",
+  "method": "time_lightning",
+  "crop": null,
+  "brightness_threshold": 200,
+  "flash_cluster_min": 50,
+  "n_frames": 30,
+  "step_seconds": 2.0,
+  "events": true,
+  "event_threshold": 0.7,
+  "base_color": [168, 78, 242]
+}

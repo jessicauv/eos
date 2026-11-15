@@ -1,4 +1,4 @@
-# Eos — Hear Our Changing Planet
+# Eos
 
 Eos is an accessible digital museum that turns NASA visualizations of our
 changing planet into music with spoken narration. It's designed for blind and
@@ -24,7 +24,7 @@ Source imagery comes from NASA's
 A static site built with plain HTML, CSS, and ES modules — no build step and no
 dependencies. The look is a warm, illustrated "vintage museum": cream and brown
 walls, a wood floor, rope barriers, spotlights, and gilt picture frames, with
-headings in Federo and body text in Inter (both self-hosted in `fonts/`).
+headings in Federo and body text in Inter (both self-hosted in `fonts/`). See [https://jessicauv.github.io/eos/](https://jessicauv.github.io/eos/)
 
 ### Running locally
 
@@ -69,9 +69,7 @@ tech. Animation is disabled under `prefers-reduced-motion`.
 
 ### Demo video
 
-The walkthrough is embedded from YouTube (the source file is far larger than
-GitHub's 100 MB limit, so it is not committed). For the embed to play for
-visitors, the YouTube video must be **Public** or **Unlisted**.
+The [full walkthrough](https://youtu.be/sHAYP6TkiFc) and [30 second vid](https://youtu.be/Yrbm80ntaJ0) are on YouTube 
 
 ## Project layout
 

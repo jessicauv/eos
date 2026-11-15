@@ -786,6 +786,14 @@ a:hover {
   color: var(--chestnut);
 }
 
+.dialog-panel .ai-credit {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--fg-muted);
+  border-top: 1px solid var(--line);
+  padding-top: 0.85rem;
+}
+
 /* Player controls */
 .player-controls {
   display: flex;

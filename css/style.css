@@ -333,6 +333,12 @@ a:hover {
   margin-top: auto;
 }
 
+/* Keep the content above the floor clear of the rope posts, which rise above
+   the floor's top edge. Targets whichever element sits just before the floor. */
+.intro-main > :nth-last-child(2) {
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+}
+
 /* ===== BUTTONS ===== */
 .btn {
   display: inline-flex;

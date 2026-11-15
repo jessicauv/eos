@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 380">
+<rect width="300" height="380" fill="#1b2440"/>
+<circle cx="38" cy="40" r="2.5" fill="#ffefdc"/>
+<circle cx="92" cy="22" r="1.8" fill="#ffefdc"/>
+<circle cx="150" cy="52" r="2.2" fill="#ffefdc"/>
+<circle cx="214" cy="30" r="2.6" fill="#ffefdc"/>
+<circle cx="262" cy="66" r="1.8" fill="#ffefdc"/>
+<circle cx="58" cy="96" r="1.8" fill="#ffefdc"/>
+<circle cx="246" cy="112" r="2.2" fill="#ffefdc"/>
+<circle cx="120" cy="84" r="1.5" fill="#ffefdc"/>
+<circle cx="190" cy="90" r="1.6" fill="#ffefdc"/>
+<circle cx="24" cy="150" r="2" fill="#ffefdc"/>
+<circle cx="278" cy="160" r="1.6" fill="#ffefdc"/>
+<circle cx="150" cy="232" r="150" fill="#2c3168"/>
+<circle cx="150" cy="232" r="116" fill="#6b3f86"/>
+<circle cx="150" cy="232" r="84" fill="#d9532f"/>
+<circle cx="150" cy="232" r="56" fill="#f79a2e"/>
+<circle cx="150" cy="232" r="32" fill="#ffd166"/>
+<line x1="59.8" y1="199.2" x2="29.7" y2="188.2" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<line x1="73.8" y1="173.6" x2="48.5" y2="154.1" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<line x1="94.9" y1="153.4" x2="76.6" y2="127.1" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<line x1="121.1" y1="140.4" x2="111.5" y2="109.9" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<line x1="150.0" y1="136.0" x2="150.0" y2="104.0" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<line x1="178.9" y1="140.4" x2="188.5" y2="109.9" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<line x1="205.1" y1="153.4" x2="223.4" y2="127.1" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<line x1="226.2" y1="173.6" x2="251.5" y2="154.1" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<line x1="240.2" y1="199.2" x2="270.3" y2="188.2" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<circle cx="150" cy="668" r="436" fill="#9bd4f5"/>
+<circle cx="150" cy="668" r="428" fill="#2f6fde"/>
+<path d="M40 300 q30 -34 74 -22 q26 10 20 34 q-8 22 -40 20 q-10 22 -34 16 q-30 -8 -20 -48z" fill="#2f9e55"/>
+<path d="M196 270 q36 -8 60 14 q22 24 44 22 v74 h-70 q-30 -14 -24 -48 q-26 -30 -10 -62z" fill="#2f9e55"/>
+<path d="M120 352 q24 -12 44 4 q10 14 -4 24 h-48 q-8 -16 8 -28z" fill="#2f9e55"/>
+<path d="M20 334 q40 -14 78 0" fill="none" stroke="#fdf6ec" stroke-width="7" stroke-linecap="round"/>
+<path d="M150 300 q34 -12 64 2" fill="none" stroke="#fdf6ec" stroke-width="7" stroke-linecap="round"/>
+<path d="M210 350 q30 -10 58 2" fill="none" stroke="#fdf6ec" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -15,47 +15,74 @@
 
   <!-- ===== INTRO SCREEN ===== -->
   <div id="intro-screen" class="screen active">
-    <header class="intro-header">
-      <h1>Eos: Hear Our Changing Planet</h1>
+    <div class="spot spot-left" aria-hidden="true">
+      <div class="frame"><img src="images/exhibit-1-thumb.jpg" alt="" width="600" height="338"></div>
+    </div>
+    <div class="spot spot-right" aria-hidden="true">
+      <div class="frame"><img src="images/exhibit-3-thumb.jpg" alt="" width="600" height="338"></div>
+    </div>
+
+    <header class="intro-header on-dark">
+      <h1>
+        <span class="title-main">Eos<span class="sr-only">:</span></span>
+        <span class="title-sub">Hear Our Changing Planet</span>
+      </h1>
     </header>
     <main class="intro-main">
-      <p class="intro-description">
-        I built a miniature physical museum that turns NASA images of our changing
-        planet into music, designed for blind and low-vision visitors. Since you
-        can't visit the physical one, I built this digital version so you can
-        experience it too.
-      </p>
+      <div class="intro-lead on-dark">
+        <p class="intro-description">
+          I built a miniature physical museum that turns NASA images of our changing
+          planet into music, designed for blind and low-vision visitors. Since you
+          can't visit the physical one, I built this digital version so you can
+          experience it too.
+        </p>
 
-      <figure class="intro-photo">
-        <img
-          src="images/physical-museum.jpg"
-          alt="A miniature museum model with four glowing exhibits displaying NASA Earth images, each lit with colored LEDs"
-          width="800"
-          height="500"
-        >
-        <figcaption>The physical Eos museum model</figcaption>
-      </figure>
+        <button id="enter-museum-btn" class="btn btn-primary" type="button">
+          Enter the museum
+        </button>
 
-      <div class="intro-video">
-        <video controls width="800" preload="metadata">
-          <source src="video/demo.mp4" type="video/mp4">
-          <track kind="captions" src="video/demo.vtt" srclang="en" label="English">
-          Your browser does not support the video element.
-        </video>
+        <p class="intro-hint">Best with headphones. Use Tab and Enter to navigate.</p>
+
+        <div class="floor" aria-hidden="true"></div>
       </div>
 
-      <button id="enter-museum-btn" class="btn btn-primary" type="button">
-        Enter the museum
-      </button>
+      <div class="intro-about">
+        <div class="intro-media">
+          <figure class="intro-photo">
+            <div class="frame">
+              <img
+                src="images/physical-museum.jpg"
+                alt="A miniature museum model with four glowing exhibits displaying NASA Earth images, each lit with colored LEDs"
+                width="800"
+                height="500"
+              >
+            </div>
+            <figcaption>The physical Eos museum model</figcaption>
+          </figure>
 
-      <p class="intro-hint">Best with headphones. Use Tab and Enter to navigate.</p>
+          <div class="intro-video">
+            <div class="frame">
+              <video controls width="800" preload="metadata">
+                <source src="video/demo.mp4" type="video/mp4">
+                <track kind="captions" src="video/demo.vtt" srclang="en" label="English">
+                Your browser does not support the video element.
+              </video>
+            </div>
+          </div>
+        </div>
+        <div class="floor" aria-hidden="true"></div>
+      </div>
     </main>
   </div>
 
   <!-- ===== MUSEUM SCREEN ===== -->
   <div id="museum-screen" class="screen" hidden>
     <header class="museum-header">
+      <p class="running-head" aria-hidden="true">Eos: Hear Our Changing Planet</p>
       <h1 id="museum-heading" tabindex="-1">The Museum</h1>
+      <div class="header-art" aria-hidden="true">
+        <div class="frame"><img src="images/decor/dawn.svg" alt="" width="300" height="380"></div>
+      </div>
     </header>
 
     <main class="museum-main" id="museum">
@@ -89,15 +116,18 @@
       </section>
 
       <!-- Exhibit grid -->
-      <section class="exhibit-grid" aria-label="Exhibits">
-        <h2 class="sr-only">Exhibits</h2>
+      <section class="exhibit-grid on-dark" aria-label="Exhibits">
+        <div class="spot spot-left" aria-hidden="true"></div>
+        <div class="spot spot-right" aria-hidden="true"></div>
+        <h2>Exhibits</h2>
         <div id="exhibit-cards" class="cards">
           <!-- Cards rendered dynamically by exhibits.js -->
         </div>
+        <div class="floor" aria-hidden="true"></div>
       </section>
     </main>
 
-    <footer class="museum-footer">
+    <footer class="museum-footer on-dark">
       <p>
         Data courtesy of <a href="https://svs.gsfc.nasa.gov/" target="_blank" rel="noopener">NASA Scientific Visualization Studio</a>.
       </p>
@@ -112,7 +142,9 @@
   <dialog id="exhibit-dialog" class="exhibit-dialog" aria-label="Exhibit detail">
     <div class="dialog-layout">
       <div class="dialog-image">
-        <img id="dialog-img" src="" alt="" width="1600" height="1000">
+        <div class="frame">
+          <img id="dialog-img" src="" alt="" width="1600" height="1000">
+        </div>
       </div>
       <div class="dialog-panel">
         <h2 id="dialog-title" tabindex="-1"></h2>

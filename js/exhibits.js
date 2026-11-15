@@ -57,14 +57,19 @@ function renderCards() {
     card.style.setProperty('--glow-color', ex.glowColor);
 
     card.innerHTML = `
-      <h3>Exhibit ${ex.id}: ${ex.title}</h3>
-      <img
-        src="${ex.thumb}"
-        alt="${ex.alt}"
-        width="600"
-        height="375"
-        loading="lazy"
-      >
+      <h3>
+        <span class="card-num" aria-hidden="true">${String(ex.id).padStart(2, '0')}</span>
+        <span>Exhibit ${ex.id}: ${ex.title}</span>
+      </h3>
+      <div class="frame">
+        <img
+          src="${ex.thumb}"
+          alt="${ex.alt}"
+          width="600"
+          height="375"
+          loading="lazy"
+        >
+      </div>
       <p>${ex.summary}</p>
       <button class="btn btn-open" type="button" data-exhibit="${ex.id}">Open exhibit</button>
     `;

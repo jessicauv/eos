@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eos: Hear Our Changing Planet</title>
+  <title>Eos</title>
   <meta name="description" content="An accessible digital museum that turns NASA visualizations of our changing planet into music with spoken explanations.">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,71 +14,67 @@
   <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
   <!-- ===== INTRO SCREEN ===== -->
-  <div id="intro-screen" class="screen active">
-    <div class="spot spot-left" aria-hidden="true">
-      <div class="frame"><img src="images/exhibit-1-thumb.jpg" alt="" width="600" height="338"></div>
-    </div>
-    <div class="spot spot-right" aria-hidden="true">
-      <div class="frame"><img src="images/exhibit-3-thumb.jpg" alt="" width="600" height="338"></div>
-    </div>
+  <div id="intro-screen" class="screen active on-dark">
+    <div class="spot spot-left" aria-hidden="true"></div>
+    <div class="spot spot-right" aria-hidden="true"></div>
 
-    <header class="intro-header on-dark">
-      <h1>
-        <span class="title-main">Eos<span class="sr-only">:</span></span>
-        <span class="title-sub">Hear Our Changing Planet</span>
-      </h1>
+    <header class="intro-header">
+      <h1 class="title-main">Eos</h1>
     </header>
+
     <main class="intro-main">
-      <div class="intro-lead on-dark">
-        <p class="intro-description">
-          I built a miniature physical museum that turns NASA images of our changing
-          planet into music, designed for blind and low-vision visitors. Since you
-          can't visit the physical one, I built this digital version so you can
-          experience it too.
-        </p>
+      <div class="intro-media">
+        <figure class="intro-photo">
+          <div class="frame">
+            <img
+              src="images/museum.jpg"
+              alt="A miniature cardboard museum model lit with a blue LED strip, showing a framed NASA Earth image, a small figure, and the breadboard electronics that drive it"
+              width="800"
+              height="500"
+            >
+          </div>
+          <figcaption>The physical Eos museum model</figcaption>
+        </figure>
 
-        <button id="enter-museum-btn" class="btn btn-primary" type="button">
-          Enter the museum
-        </button>
-
-        <p class="intro-hint">Best with headphones. Use Tab and Enter to navigate.</p>
-
-        <div class="floor" aria-hidden="true"></div>
-      </div>
-
-      <div class="intro-about">
-        <div class="intro-media">
-          <figure class="intro-photo">
-            <div class="frame">
-              <img
-                src="images/physical-museum.jpg"
-                alt="A miniature museum model with four glowing exhibits displaying NASA Earth images, each lit with colored LEDs"
-                width="800"
-                height="500"
-              >
-            </div>
-            <figcaption>The physical Eos museum model</figcaption>
-          </figure>
-
-          <div class="intro-video">
-            <div class="frame">
-              <video controls width="800" preload="metadata">
-                <source src="video/demo.mp4" type="video/mp4">
-                <track kind="captions" src="video/demo.vtt" srclang="en" label="English">
-                Your browser does not support the video element.
-              </video>
+        <figure class="intro-video">
+          <div class="frame">
+            <div class="video-embed">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/sHAYP6TkiFc"
+                title="A walkthrough of the physical Eos build"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
             </div>
           </div>
-        </div>
-        <div class="floor" aria-hidden="true"></div>
+          <figcaption>A walkthrough of the physical build</figcaption>
+        </figure>
       </div>
+
+      <p class="intro-description">
+        I built a miniature physical museum that turns NASA images of our changing
+        planet into music, designed for blind and low-vision visitors. Since you
+        can't visit the physical one, I built this digital version so you can
+        experience it too.
+      </p>
+
+      <button id="enter-museum-btn" class="btn btn-primary" type="button">
+        Enter the museum
+      </button>
+
+      <p class="intro-hint">Best with headphones. Use Tab and Enter to navigate.</p>
+
+      <div class="floor" aria-hidden="true"></div>
     </main>
   </div>
 
   <!-- ===== MUSEUM SCREEN ===== -->
   <div id="museum-screen" class="screen" hidden>
     <header class="museum-header">
-      <p class="running-head" aria-hidden="true">Eos: Hear Our Changing Planet</p>
+      <div class="museum-topbar">
+        <button id="leave-museum-btn" class="btn btn-secondary btn-back" type="button">Leave museum</button>
+      </div>
       <h1 id="museum-heading" tabindex="-1">The Museum</h1>
       <div class="header-art" aria-hidden="true">
         <div class="frame"><img src="images/decor/dawn.svg" alt="" width="300" height="380"></div>
@@ -88,18 +84,7 @@
     <main class="museum-main" id="museum">
       <!-- Tour controls -->
       <section class="tour-controls" aria-label="Tour controls">
-        <button id="start-tour-btn" class="btn btn-primary" type="button">Start guided tour</button>
-        <button id="play-welcome-btn" class="btn btn-secondary" type="button">Play welcome and layout</button>
-
-        <!-- Active tour controls (hidden until tour starts) -->
-        <div id="tour-active-controls" class="tour-active-controls" hidden>
-          <p id="tour-status" class="tour-status"></p>
-          <div class="tour-buttons">
-            <button id="tour-pause-btn" class="btn btn-secondary" type="button">Pause</button>
-            <button id="tour-skip-btn" class="btn btn-secondary" type="button">Skip to next</button>
-            <button id="tour-stop-btn" class="btn btn-secondary" type="button">Stop tour</button>
-          </div>
-        </div>
+        <button id="start-tour-btn" class="btn btn-primary" type="button" aria-pressed="false">Start guided tour</button>
       </section>
 
       <!-- Keyboard shortcuts -->
@@ -129,17 +114,18 @@
 
     <footer class="museum-footer on-dark">
       <p>
-        Data courtesy of <a href="https://svs.gsfc.nasa.gov/" target="_blank" rel="noopener">NASA Scientific Visualization Studio</a>.
-      </p>
-      <p>
-        <a href="#" target="_blank" rel="noopener">Project write-up</a> ·
-        <span>Eos is designed to be fully accessible. If you encounter any issues, please let us know.</span>
+        Data courtesy of <a href="https://svs.gsfc.nasa.gov/gallery/earth-information-center/" target="_blank" rel="noopener">Earth Information Center (EIC) Content Database</a>.
       </p>
     </footer>
   </div>
 
   <!-- ===== EXHIBIT DIALOG ===== -->
   <dialog id="exhibit-dialog" class="exhibit-dialog" aria-label="Exhibit detail">
+    <div class="dialog-topbar">
+      <button id="dialog-close-btn" class="dialog-close-x" type="button" aria-label="Close exhibit">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <div class="dialog-layout">
       <div class="dialog-image">
         <div class="frame">
@@ -185,8 +171,6 @@
           <button id="dialog-prev-btn" class="btn btn-secondary" type="button">Previous exhibit</button>
           <button id="dialog-next-btn" class="btn btn-secondary" type="button">Next exhibit</button>
         </nav>
-
-        <button id="dialog-close-btn" class="btn btn-close" type="button">Close</button>
       </div>
     </div>
   </dialog>

@@ -1,180 +1,79 @@
 import * as player from './player.js';
-import { getExhibits, getWelcomeData, getClosingData, getCardByExhibitId, openExhibit, closeExhibit, isDialogOpen } from './exhibits.js';
+import {
+  getExhibits,
+  openExhibit,
+  closeExhibit,
+  isDialogOpen,
+  getCurrentExhibitIndex,
+  setTourMode,
+  setOnTourExit,
+} from './exhibits.js';
 
 let running = false;
-let paused = false;
-let onLedPlay = null;
-let onLedStop = null;
-let queue = [];
-let currentStep = -1;
-let pauseTimer = null;
+let advanceTimer = null;
 let onAnnounce = null;
 
 const startBtn = document.getElementById('start-tour-btn');
-const welcomeBtn = document.getElementById('play-welcome-btn');
-const activeControls = document.getElementById('tour-active-controls');
-const tourStatus = document.getElementById('tour-status');
-const tourPauseBtn = document.getElementById('tour-pause-btn');
-const tourSkipBtn = document.getElementById('tour-skip-btn');
-const tourStopBtn = document.getElementById('tour-stop-btn');
 
-export function init(announceFn, ledPlayFn, ledStopFn) {
+export function init(announceFn) {
   onAnnounce = announceFn;
-  onLedPlay = ledPlayFn || null;
-  onLedStop = ledStopFn || null;
-  startBtn.addEventListener('click', start);
-  welcomeBtn.addEventListener('click', playWelcome);
-  tourPauseBtn.addEventListener('click', pauseResume);
-  tourSkipBtn.addEventListener('click', skip);
-  tourStopBtn.addEventListener('click', stop);
+  startBtn.addEventListener('click', toggle);
+  // Closing the dialog (via the X, or Escape) ends the tour.
+  setOnTourExit(() => stop({ keepDialog: true }));
   player.on('ended', onTrackEnded);
+  // A newly started track (e.g. manual Next/Previous) cancels a pending auto-advance.
+  player.on('started', clearAdvanceTimer);
 }
 
-function buildQueue() {
-  const exhibits = getExhibits();
-  const welcome = getWelcomeData();
-  const closing = getClosingData();
-  queue = [];
-  queue.push({ type: 'welcome', audio: welcome.audio, label: 'Welcome' });
-  exhibits.forEach((ex, i) => {
-    queue.push({ type: 'exhibit', audio: ex.audio, exhibitId: ex.id, label: `Exhibit ${i + 1} of ${exhibits.length} — ${ex.title}` });
-  });
-  queue.push({ type: 'closing', audio: closing.audio, label: 'Closing' });
+function toggle() {
+  if (running) stop();
+  else start();
 }
 
 export function start() {
-  if (isDialogOpen()) closeExhibit();
-  buildQueue();
+  const exhibits = getExhibits();
+  if (!exhibits.length) return;
   running = true;
-  paused = false;
-  currentStep = -1;
-  showControls(true);
-  announce('Tour started');
-  playNext();
+  startBtn.setAttribute('aria-pressed', 'true');
+  startBtn.textContent = 'Stop guided tour';
+  setTourMode(true);
+  announce('Guided tour started');
+  // Opening the exhibit auto-plays its audio (tour mode).
+  openExhibit(exhibits[0].id);
 }
 
-function playWelcome() {
-  const welcome = getWelcomeData();
-  if (!welcome) return;
-  player.play(welcome.audio);
-}
-
-export function pauseResume() {
+export function stop(opts = {}) {
   if (!running) return;
-
-  if (pauseTimer) {
-    clearTimeout(pauseTimer);
-    pauseTimer = null;
-  }
-
-  if (paused) {
-    paused = false;
-    tourPauseBtn.textContent = 'Pause';
-    announce('Tour resumed');
-    if (player.isPlaying()) return;
-    player.resume();
-    if (!player.isPlaying()) playNext();
-  } else {
-    paused = true;
-    tourPauseBtn.textContent = 'Resume';
-    player.pause();
-    announce('Paused');
-  }
-}
-
-export function skip() {
-  if (!running) return;
-  if (pauseTimer) {
-    clearTimeout(pauseTimer);
-    pauseTimer = null;
-  }
-  player.stop();
-  paused = false;
-  tourPauseBtn.textContent = 'Pause';
-  playNext();
-}
-
-export function stop() {
-  if (!running) return;
-  if (pauseTimer) {
-    clearTimeout(pauseTimer);
-    pauseTimer = null;
-  }
-  player.stop();
   running = false;
-  paused = false;
-  currentStep = -1;
-  clearHighlights();
-  if (onLedStop) onLedStop();
-  showControls(false);
-  announce('Tour stopped');
-}
-
-function playNext() {
-  clearHighlights();
-  currentStep++;
-  if (currentStep >= queue.length) {
-    running = false;
-    currentStep = -1;
-    if (onLedStop) onLedStop();
-    showControls(false);
-    announce('Tour finished');
-    return;
-  }
-
-  const step = queue[currentStep];
-  tourStatus.textContent = `Now playing: ${step.label}`;
-  announce(`Now playing ${step.label}`);
-
-  if (step.type === 'exhibit') {
-    highlightCard(step.exhibitId);
-    if (onLedPlay) onLedPlay(step.exhibitId);
-  } else {
-    if (onLedStop) onLedStop();
-  }
-
-  player.play(step.audio);
+  clearAdvanceTimer();
+  startBtn.setAttribute('aria-pressed', 'false');
+  startBtn.textContent = 'Start guided tour';
+  setTourMode(false);
+  announce('Guided tour stopped');
+  if (!opts.keepDialog && isDialogOpen()) closeExhibit();
 }
 
 function onTrackEnded() {
-  if (!running || paused) return;
-
-  clearHighlights();
-
-  if (currentStep >= queue.length - 1) {
-    running = false;
-    currentStep = -1;
-    if (onLedStop) onLedStop();
-    showControls(false);
-    announce('Tour finished');
-    return;
-  }
-
-  pauseTimer = setTimeout(() => {
-    pauseTimer = null;
-    if (running && !paused) playNext();
-  }, 3000);
-}
-
-function highlightCard(exhibitId) {
-  const card = getCardByExhibitId(exhibitId);
-  if (card) card.classList.add('playing');
-}
-
-function clearHighlights() {
-  document.querySelectorAll('.card.playing').forEach((c) => c.classList.remove('playing'));
-}
-
-function showControls(visible) {
-  activeControls.hidden = !visible;
-  if (visible) {
-    startBtn.hidden = true;
-    welcomeBtn.hidden = true;
+  if (!running) return;
+  const exhibits = getExhibits();
+  const idx = getCurrentExhibitIndex();
+  if (idx < exhibits.length - 1) {
+    // Pause on this exhibit, then move to the next one.
+    clearAdvanceTimer();
+    advanceTimer = setTimeout(() => {
+      advanceTimer = null;
+      if (running) openExhibit(exhibits[idx + 1].id);
+    }, 2500);
   } else {
-    startBtn.hidden = false;
-    welcomeBtn.hidden = false;
-    tourStatus.textContent = '';
-    tourPauseBtn.textContent = 'Pause';
+    // Last exhibit finished — leave the dialog open so the visitor can read on.
+    stop({ keepDialog: true });
+  }
+}
+
+function clearAdvanceTimer() {
+  if (advanceTimer) {
+    clearTimeout(advanceTimer);
+    advanceTimer = null;
   }
 }
 
@@ -184,8 +83,4 @@ function announce(msg) {
 
 export function isRunning() {
   return running;
-}
-
-export function handleExhibitOpened() {
-  if (running) stop();
 }

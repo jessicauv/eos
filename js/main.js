@@ -1,4 +1,4 @@
-import { loadExhibits, setOnExhibitOpened, setOnExhibitPlay, setOnExhibitStop, openExhibit, closeExhibit, isDialogOpen, getExhibits, getCurrentExhibitIndex } from './exhibits.js';
+import { loadExhibits, setOnExhibitPlay, setOnExhibitStop, openExhibit, closeExhibit, isDialogOpen, getExhibits, getCurrentExhibitIndex } from './exhibits.js';
 import * as player from './player.js';
 import * as tour from './tour.js';
 import * as led from './led.js';
@@ -7,6 +7,7 @@ import { announce } from './announcer.js';
 const introScreen = document.getElementById('intro-screen');
 const museumScreen = document.getElementById('museum-screen');
 const enterBtn = document.getElementById('enter-museum-btn');
+const leaveBtn = document.getElementById('leave-museum-btn');
 const dialogPlayBtn = document.getElementById('dialog-play-btn');
 
 function showMuseum() {
@@ -17,7 +18,20 @@ function showMuseum() {
   document.getElementById('museum-heading').focus();
 }
 
+function showIntro() {
+  if (tour.isRunning()) tour.stop();
+  if (isDialogOpen()) closeExhibit();
+  player.stop();
+  museumScreen.classList.remove('active');
+  museumScreen.hidden = true;
+  introScreen.hidden = false;
+  introScreen.classList.add('active');
+  window.scrollTo(0, 0);
+  enterBtn.focus();
+}
+
 enterBtn.addEventListener('click', showMuseum);
+leaveBtn.addEventListener('click', showIntro);
 
 function isTyping(e) {
   const tag = e.target.tagName;
@@ -42,9 +56,8 @@ function handleKeydown(e) {
     case ' ': {
       if (e.target === dialogPlayBtn) return;
       e.preventDefault();
-      if (tour.isRunning()) {
-        tour.pauseResume();
-      } else if (player.isPlaying()) {
+      if (tour.isRunning()) break; // audio is driven by the tour
+      if (player.isPlaying()) {
         player.pause();
         announce('Paused');
       } else {
@@ -116,9 +129,8 @@ document.addEventListener('keydown', handleKeydown);
 
 async function init() {
   await loadExhibits();
-  tour.init(announce, (id) => led.setActiveExhibit(id), () => led.clearActiveExhibit());
+  tour.init(announce);
   await led.init();
-  setOnExhibitOpened(() => tour.handleExhibitOpened());
   setOnExhibitPlay((id) => led.setActiveExhibit(id));
   setOnExhibitStop(() => led.clearActiveExhibit());
   enterBtn.focus();

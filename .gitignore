@@ -4,6 +4,9 @@
 # Pipeline source videos (too large for GitHub)
 pipeline/sources/videos/
 
+# Demo video (too large for GitHub; hosted on YouTube instead)
+video/*.mp4
+
 # Pipeline build artifacts
 pipeline/build/
 pipeline/rendered/

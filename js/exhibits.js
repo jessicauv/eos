@@ -22,13 +22,10 @@ const dialogNextBtn = document.getElementById('dialog-next-btn');
 const dialogCloseBtn = document.getElementById('dialog-close-btn');
 
 let lastOpenButton = null;
-let onExhibitOpened = null;
 let onExhibitPlay = null;
 let onExhibitStop = null;
-
-export function setOnExhibitOpened(fn) {
-  onExhibitOpened = fn;
-}
+let onTourExit = null;
+let tourMode = false;
 
 export function setOnExhibitPlay(fn) {
   onExhibitPlay = fn;
@@ -36,6 +33,32 @@ export function setOnExhibitPlay(fn) {
 
 export function setOnExhibitStop(fn) {
   onExhibitStop = fn;
+}
+
+export function setOnTourExit(fn) {
+  onTourExit = fn;
+}
+
+// During the guided tour the dialog drives playback: audio starts
+// automatically and the in-dialog Play button is greyed out.
+export function setTourMode(on) {
+  tourMode = on;
+  if (!on) {
+    dialogPlayBtn.disabled = false;
+    dialogPlayBtn.textContent = 'Play';
+    dialogPlayBtn.setAttribute('aria-pressed', 'false');
+  }
+}
+
+function playCurrentForTour() {
+  const ex = exhibits[currentExhibitIndex];
+  if (!ex) return;
+  currentAudioSrc = ex.audio;
+  if (onExhibitPlay) onExhibitPlay(ex.id);
+  player.play(ex.audio);
+  dialogPlayBtn.disabled = true;
+  dialogPlayBtn.textContent = 'Playing (tour)';
+  dialogPlayBtn.setAttribute('aria-pressed', 'true');
 }
 
 export async function loadExhibits() {
@@ -93,16 +116,19 @@ function initDialog() {
   });
 
   player.on('started', () => {
+    if (tourMode) return; // button stays greyed during the tour
     dialogPlayBtn.textContent = 'Pause';
     dialogPlayBtn.setAttribute('aria-pressed', 'true');
   });
 
   player.on('paused', () => {
+    if (tourMode) return;
     dialogPlayBtn.textContent = 'Play';
     dialogPlayBtn.setAttribute('aria-pressed', 'false');
   });
 
   player.on('ended', () => {
+    if (tourMode) return; // the tour handles advancing to the next exhibit
     dialogPlayBtn.textContent = 'Play';
     dialogPlayBtn.setAttribute('aria-pressed', 'false');
     dialogProgress.textContent = '0:00 of 0:00';
@@ -113,6 +139,7 @@ function initDialog() {
     player.stop();
     currentAudioSrc = null;
     if (onExhibitStop) onExhibitStop();
+    if (tourMode && onTourExit) onTourExit();
     if (lastOpenButton) {
       lastOpenButton.focus();
       lastOpenButton = null;
@@ -139,13 +166,17 @@ export function openExhibit(id) {
   const index = exhibits.findIndex((ex) => ex.id === id);
   if (index === -1) return;
 
-  if (onExhibitOpened) onExhibitOpened();
-
   lastOpenButton = document.querySelector(`.btn-open[data-exhibit="${id}"]`);
   currentExhibitIndex = index;
   populateDialog(exhibits[index]);
-  dialog.showModal();
-  dialogPlayBtn.focus();
+  if (!dialog.open) dialog.showModal();
+
+  if (tourMode) {
+    playCurrentForTour();
+    dialogTitle.focus();
+  } else {
+    dialogPlayBtn.focus();
+  }
 }
 
 function populateDialog(ex) {
@@ -195,6 +226,7 @@ function navigateExhibit(direction) {
   currentAudioSrc = null;
   currentExhibitIndex = newIndex;
   populateDialog(exhibits[newIndex]);
+  if (tourMode) playCurrentForTour();
   dialogTitle.focus();
 }
 

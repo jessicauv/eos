@@ -238,111 +238,99 @@ a:hover {
 #intro-screen {
   background: var(--wall);
   overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .intro-header {
   position: relative;
   z-index: 1;
-  min-height: 46vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   text-align: center;
-  padding: 3rem 1rem 0;
-}
-
-.intro-header h1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  font-weight: 400;
+  padding: clamp(1.25rem, 4vh, 2.75rem) 1rem 0;
 }
 
 .title-main {
   font-family: var(--font-display);
-  font-size: clamp(6rem, 24vw, 15rem);
-  line-height: 0.85;
+  font-size: clamp(3.5rem, 13vw, 8rem);
+  line-height: 0.9;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  font-weight: 400;
   color: var(--cream);
 }
 
-.title-sub {
-  font-size: clamp(0.72rem, 1.6vw, 1rem);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  line-height: 1.3;
-  text-transform: uppercase;
-  color: var(--cream);
-  border: 2px solid var(--cream);
-  border-radius: 999px;
-  padding: 0.7rem 1.8rem;
-}
-
-.intro-lead {
+.intro-main {
   position: relative;
   z-index: 1;
-  min-height: 54vh;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  padding-top: 2rem;
+  padding-top: 1.5rem;
 }
 
-.intro-lead > :not(.floor) {
-  margin-inline: 1rem;
-}
-
-.intro-description {
-  font-size: 1.1rem;
-  text-align: center;
-  max-width: 38rem;
-}
-
-.intro-hint {
-  font-size: 0.85rem;
-  color: var(--fg-muted);
-  text-align: center;
-  padding-bottom: 2.5rem;
-}
-
-.intro-lead .floor {
-  margin-top: auto;
-}
-
-.intro-about {
-  position: relative;
-  z-index: 1;
-  background: var(--cream);
-  padding-top: 4rem;
+.intro-main > :not(.floor) {
+  width: min(62rem, 100% - 2rem);
 }
 
 .intro-media {
-  max-width: 62rem;
-  margin: 0 auto;
-  padding: 0 1rem 5rem;
   display: grid;
-  gap: 2.5rem;
+  gap: 1.5rem 2rem;
   align-items: start;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 740px) {
   .intro-media {
     grid-template-columns: 1fr 1fr;
   }
 }
 
-.intro-photo figcaption {
+.intro-photo,
+.intro-video {
+  margin: 0;
+}
+
+.intro-photo figcaption,
+.intro-video figcaption {
   text-align: center;
   color: var(--fg-muted);
   font-size: 0.85rem;
   margin-top: 0.75rem;
 }
 
-.intro-video video {
-  aspect-ratio: 16 / 10;
+.video-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 3px solid #391c0b;
+  background: #2a211d;
+}
+
+.intro-description {
+  font-size: 1.1rem;
+  text-align: center;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.intro-hint {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  text-align: center;
+}
+
+.intro-main .floor {
+  width: 100%;
+  margin-top: auto;
 }
 
 /* ===== BUTTONS ===== */
@@ -379,8 +367,7 @@ a:hover {
 }
 
 .btn-secondary,
-.btn-open,
-.btn-close {
+.btn-open {
   background-color: transparent;
   color: var(--fg);
   border-color: var(--fg);
@@ -389,9 +376,7 @@ a:hover {
 .btn-secondary:hover,
 .btn-secondary:focus-visible,
 .btn-open:hover,
-.btn-open:focus-visible,
-.btn-close:hover,
-.btn-close:focus-visible {
+.btn-open:focus-visible {
   background-color: var(--fg);
   color: var(--bg);
 }
@@ -410,18 +395,24 @@ a:hover {
   padding: 2rem 1rem 1.5rem;
 }
 
-.running-head {
+.museum-topbar {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  font-size: 0.85rem;
 }
 
-.running-head::after {
+.museum-topbar::after {
   content: "";
   flex: 1;
   height: 1px;
   background: var(--ink);
+}
+
+.btn-back::before {
+  content: "\2190";
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+  line-height: 0;
 }
 
 .museum-header h1 {
@@ -468,30 +459,6 @@ a:hover {
   gap: 0.75rem;
   align-items: center;
   margin-bottom: 2.5rem;
-}
-
-.tour-active-controls {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.25rem;
-  background: var(--paper);
-  border: 2px solid var(--chestnut);
-  border-radius: var(--radius);
-}
-
-.tour-status {
-  font-weight: 700;
-  color: var(--chestnut);
-  flex: 1 1 100%;
-}
-
-.tour-buttons {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
 }
 
 /* Shortcuts, laid out like the deck's table of contents */
@@ -709,11 +676,45 @@ a:hover {
   background: rgba(40, 30, 26, 0.85);
 }
 
+/* Sticky zero-height bar that keeps the close X in the top-right corner while scrolling */
+.dialog-topbar {
+  position: sticky;
+  top: 0;
+  height: 0;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 10;
+}
+
+.dialog-close-x {
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: 0.6rem 0.6rem 0 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  line-height: 1;
+  background: var(--cream);
+  color: var(--ink);
+  border: 2px solid var(--wall);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(40, 30, 26, 0.25);
+}
+
+.dialog-close-x:hover,
+.dialog-close-x:focus-visible {
+  background: var(--wall);
+  color: var(--cream);
+}
+
 .dialog-layout {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding: clamp(1.25rem, 3vw, 2.25rem);
+  padding-top: 0;
 }
 
 @media (min-width: 768px) {
@@ -822,10 +823,6 @@ a:hover {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-}
-
-.dialog-panel .btn-close {
-  align-self: flex-start;
 }
 
 /* ===== FOOTER ===== */
